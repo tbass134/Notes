@@ -12,13 +12,15 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
                             
     var window: UIWindow?
-    var notes = String[]()
+    var notes = Note[]()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
 
-        if let myOutput: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("notes") as? String[] {
-           notes = myOutput as String[]
+        if let dataObject : AnyObject = NSUserDefaults.standardUserDefaults().valueForKey("notes")
+        {
+            notes = NSKeyedUnarchiver.unarchiveObjectWithData(dataObject as NSData) as Note[]
         }
+
         return true
     }
 
@@ -30,8 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
 
         let swiftArray = notes as AnyObject[]
-        if let downcastedSwiftArray = swiftArray as? String[] {
-            NSUserDefaults.standardUserDefaults().setObject(downcastedSwiftArray, forKey: "notes")
+        if let downcastedSwiftArray = swiftArray as? Note[] {
+            let dataObject = NSKeyedArchiver.archivedDataWithRootObject(downcastedSwiftArray)
+            NSUserDefaults.standardUserDefaults() .setObject(dataObject, forKey:"notes")
         }
 
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.

@@ -11,10 +11,11 @@ import UIKit
 class NoteDetailViewController: UIViewController, UITextViewDelegate {
 
     @IBOutlet var noteText : UITextView!
-    var theText:String?
-    var notesIndex:Int!
+    @IBOutlet var dateText : UILabel!
+    var theNote:Note!
     
-    var isUpdating = false;
+    var theText:String?
+    
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, theText:String) {
@@ -29,10 +30,14 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let someNote = theNote? {
+            let df = NSDateFormatter()
+            df.dateStyle = NSDateFormatterStyle.ShortStyle
+            df.timeStyle = NSDateFormatterStyle.NoStyle
+            noteText.text = df.stringFromDate(someNote.dateAdded)
+            noteText.text = someNote.noteText + "\n Updated On:" + df.stringFromDate(someNote.dateAdded)
 
-        if(theText){
-            isUpdating = true
-            self.noteText.text = theText
+            
         }
         
         // Do any additional setup after loading the view.
@@ -53,13 +58,15 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
     {
         if(text == "\n")
         {
-            if isUpdating {
-                appDelegate.notes[notesIndex] = textView.text;
+            if let someNote = theNote? {
+                someNote.noteText = textView.text
+                someNote.dateAdded = NSDate.date()
             }
             else {
-                appDelegate.notes.append(textView.text);
+                var note:Note! = Note(noteText: textView.text, dateAdded: NSDate.date())
+                appDelegate.notes.append(note);
             }
-            textView .resignFirstResponder()
+            textView.resignFirstResponder()
             return false
         }
         return true

@@ -35,14 +35,14 @@ class NotesTableView: UITableViewController, UITableViewDataSource,UITableViewDe
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell!
     {
         var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
-        cell.textLabel.text=appDelegate.notes[indexPath.row]
+        let theNote = appDelegate.notes[indexPath.row]
+        cell.textLabel.text = theNote.noteText
         return cell
     }
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
     {
         self.performSegueWithIdentifier("EditNote", sender: nil)
     }
-    
     
     func addNote(item: UIBarButtonItem)
     {
@@ -55,8 +55,8 @@ class NotesTableView: UITableViewController, UITableViewDataSource,UITableViewDe
         {
             let indexPath = self.tableView .indexPathForSelectedRow()
             let detail:NoteDetailViewController = segue.destinationViewController as NoteDetailViewController;
-            detail.theText = appDelegate.notes[indexPath.row]
-            detail.notesIndex = indexPath.row
+            let theNote = appDelegate.notes[indexPath.row]
+            detail.theNote = theNote
         }
     }
     
