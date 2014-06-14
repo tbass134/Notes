@@ -10,6 +10,7 @@ import UIKit
 class NotesTableView: UITableViewController, UITableViewDataSource,UITableViewDelegate {
     
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    
     override func viewDidLoad()
     {
         var button = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: "addNote:")
@@ -19,7 +20,12 @@ class NotesTableView: UITableViewController, UITableViewDataSource,UITableViewDe
     }
     override func viewDidAppear(animated: Bool)
     {
-        println(appDelegate.notes)
+        func sortByDate(item1:Note, item2:Note) ->Bool
+        {
+            return item1.dateAdded.compare(item2.dateAdded) == NSComparisonResult.OrderedDescending
+        }
+        appDelegate.notes = sort(appDelegate.notes,sortByDate)
+
         self.tableView .reloadData()
     }
 

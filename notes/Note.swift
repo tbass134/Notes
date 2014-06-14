@@ -34,4 +34,8 @@ class Note : NSObject {
         self.dateAdded = aDecoder.decodeObjectForKey("dateAdded") as NSDate
     }
     
+    func description() -> String!
+    {
+        return self.noteText
+    }
 }
