@@ -36,6 +36,6 @@ class Note : NSObject {
     
     func description() -> String!
     {
-        return self.noteText
+        return "note: " + self.noteText + " date: " +  self.dateAdded.description
     }
 }

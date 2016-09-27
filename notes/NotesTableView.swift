@@ -10,6 +10,7 @@ import UIKit
 class NotesTableView: UITableViewController, UITableViewDataSource,UITableViewDelegate {
     
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    var notes = Note[]()
     
     override func viewDidLoad()
     {
@@ -20,12 +21,10 @@ class NotesTableView: UITableViewController, UITableViewDataSource,UITableViewDe
     }
     override func viewDidAppear(animated: Bool)
     {
-        func sortByDate(item1:Note, item2:Note) ->Bool
-        {
-            return item1.dateAdded.compare(item2.dateAdded) == NSComparisonResult.OrderedDescending
-        }
-        appDelegate.notes = sort(appDelegate.notes,sortByDate)
-
+        notes  = sort(NoteManager.sharedInstance.loadNotes(), {
+            (item1:Note, item2:Note) -> Bool in
+                return item1.dateAdded.compare(item2.dateAdded) == NSComparisonResult.OrderedDescending
+            })
         self.tableView .reloadData()
     }
 
@@ -36,20 +35,24 @@ class NotesTableView: UITableViewController, UITableViewDataSource,UITableViewDe
 
     override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int
     {
-        return appDelegate.notes.count
+        return notes.count
+    }
+    override func tableView(tableView: UITableView!, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat
+    {
+        return 50
     }
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell!
     {
         var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
-        let theNote = appDelegate.notes[indexPath.row]
+        let theNote = notes[indexPath.row]
         cell.textLabel.text = theNote.noteText
+        cell.textLabel.numberOfLines = 0;
         return cell
     }
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
     {
         self.performSegueWithIdentifier("EditNote", sender: nil)
     }
-    
     func addNote(item: UIBarButtonItem)
     {
         self.performSegueWithIdentifier("AddNote", sender: nil)
@@ -61,7 +64,7 @@ class NotesTableView: UITableViewController, UITableViewDataSource,UITableViewDe
         {
             let indexPath = self.tableView .indexPathForSelectedRow()
             let detail:NoteDetailViewController = segue.destinationViewController as NoteDetailViewController;
-            let theNote = appDelegate.notes[indexPath.row]
+            let theNote = notes[indexPath.row]
             detail.theNote = theNote
         }
     }

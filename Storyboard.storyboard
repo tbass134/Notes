@@ -49,8 +49,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Zv-69-WEA">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Zv-69-WEA">
+                                <rect key="frame" x="0.0" y="85" width="320" height="483"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -58,13 +58,25 @@
                                     <outlet property="delegate" destination="9zT-Fn-o9d" id="P44-ih-BTK"/>
                                 </connections>
                             </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBN-lS-oQy">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="4Zv-69-WEA" secondAttribute="trailing" id="0Oj-RU-ZYc"/>
+                            <constraint firstItem="4Zv-69-WEA" firstAttribute="leading" secondItem="Q21-z3-kjX" secondAttribute="leading" id="9Yf-QI-cWa"/>
+                            <constraint firstAttribute="bottom" secondItem="4Zv-69-WEA" secondAttribute="bottom" id="hhP-W6-6au"/>
+                            <constraint firstItem="yBN-lS-oQy" firstAttribute="top" secondItem="cKs-N6-iUZ" secondAttribute="bottom" constant="7" id="meM-uU-DEk"/>
+                            <constraint firstItem="cKs-N6-iUZ" firstAttribute="leading" secondItem="yBN-lS-oQy" secondAttribute="trailing" constant="-280" id="nb0-eR-2Bi"/>
+                            <constraint firstItem="4Zv-69-WEA" firstAttribute="top" secondItem="yBN-lS-oQy" secondAttribute="bottom" constant="14" id="rQ0-Wn-DUM"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vVI-qB-G2T"/>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="dateText" destination="yBN-lS-oQy" id="dfT-52-ZPc"/>
                         <outlet property="noteText" destination="4Zv-69-WEA" id="YpV-Bb-2Kg"/>
                     </connections>
                 </viewController>

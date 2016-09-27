@@ -14,6 +14,7 @@
 		45F57C51194499B200E55543 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F57C50194499B200E55543 /* AppDelegate.swift */; };
 		45F57C53194499B200E55543 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45F57C52194499B200E55543 /* Images.xcassets */; };
 		45F57C5F194499B200E55543 /* notesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F57C5E194499B200E55543 /* notesTests.swift */; };
+		9AB621D41951016A00196775 /* NoteManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB621D31951016A00196775 /* NoteManger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		45F57C58194499B200E55543 /* notesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = notesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45F57C5D194499B200E55543 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45F57C5E194499B200E55543 /* notesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notesTests.swift; sourceTree = "<group>"; };
+		9AB621D31951016A00196775 /* NoteManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteManger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				45A6B34E19449D8400D69F57 /* NotesTableView.swift */,
 				45A6B3551944B83C00D69F57 /* NoteDetailViewController.swift */,
 				45CAEC30194CAEAC0024507A /* Note.swift */,
+				9AB621D31951016A00196775 /* NoteManger.swift */,
 			);
 			path = notes;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				45A6B34F19449D8400D69F57 /* NotesTableView.swift in Sources */,
 				45A6B3561944B83C00D69F57 /* NoteDetailViewController.swift in Sources */,
 				45CAEC31194CAEAC0024507A /* Note.swift in Sources */,
+				9AB621D41951016A00196775 /* NoteManger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

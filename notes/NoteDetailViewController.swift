@@ -34,8 +34,8 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
             let df = NSDateFormatter()
             df.dateStyle = NSDateFormatterStyle.ShortStyle
             df.timeStyle = NSDateFormatterStyle.NoStyle
-            noteText.text = df.stringFromDate(someNote.dateAdded)
-            noteText.text = someNote.noteText + "\n Updated On:" + df.stringFromDate(someNote.dateAdded)
+            dateText.text = df.stringFromDate(someNote.dateAdded)
+            noteText.text = someNote.noteText// + "\n Updated On:" + df.stringFromDate(someNote.dateAdded)
 
             
         }
@@ -49,6 +49,7 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
 
     func goBack(item:UIBarButtonItem)
     {
+        saveNote()
         self.navigationController .popViewControllerAnimated(true);
     }
     /*
@@ -58,20 +59,25 @@ class NoteDetailViewController: UIViewController, UITextViewDelegate {
     {
         if(text == "\n")
         {
-            if let someNote = theNote? {
-                someNote.noteText = textView.text
-                someNote.dateAdded = NSDate.date()
-            }
-            else {
-                var note:Note! = Note(noteText: textView.text, dateAdded: NSDate.date())
-                appDelegate.notes.append(note);
-            }
             textView.resignFirstResponder()
             return false
         }
         return true
     }
 
+    func saveNote()
+    {
+        if let someNote = theNote? {
+            someNote.noteText = noteText.text
+            someNote.dateAdded = NSDate.date()
+        }
+        else {
+            var note:Note! = Note(noteText: noteText.text, dateAdded: NSDate.date())
+            NoteManager.sharedInstance.notes.append(note);
+        }
+        NoteManager.sharedInstance.saveNotes()
+
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
